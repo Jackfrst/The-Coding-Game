@@ -1,129 +1,85 @@
-create database  lab5;
-use lab5;
+create database lab;
+use lab;
 
-create table Teacher (
-TID int Not Null, 
-FirstName varchar(10),
-LastName varchar(10),
-Dept varchar(10),
-Age int ,
-Salary int,
-primary key (TID)); 
+--Question 1
+create table The_customer_table (
+customer_id varchar(12) NOT Null,
+customer_name varchar(10),
+customer_street varchar(20),
+customer_city varchar(10),
+PRIMARY KEY (customer_id)
+);
 
-insert into Teacher values
-(1,'Meraj','Ali','CSE',25,30000),
-(2,'Sanjir','Shishir','CSE',24,31000),
-(3,'Moshiur','Rahman','EEE',23,29000),
-(4,'Symun','Islam','EEE',24,36000),
-(5,'Sazzed','Islam','ECE',22,28000),
-(6,'Samia','Sultana','CSE',26,38000),
-(7,'Arifa','Ferdoushi','ECE',30,50000);
-
-create table Student (
-id int Not Null, 
-name varchar(10),
-dept varchar(10),
-Semester int ,
-CourseCode varchar(10),
-Age int ,
-CreditTaken int,
-TeacherID int,
-primary key (id),
-FOREIGN KEY (TeacherID) REFERENCES Teacher(TID)
-); 
-
-insert into Student values
-(1,'Noor','CSE',7,'CSE-313',22,3,1),
-(2,'Arko','EEE',6,'EEE-231',21,4,7),
-(3,'Ratul','ECE',8,'ECE-341',23,3,5),
-(4,'Toru','EEE',5,'EEE-221',20,4,4),
-(5,'Rashmi','CSE',7,'CSE-314',23,1,1),
-(6,'Sanjida','ECE',6,'ECE-231',22,3,7),
-(7,'Mamun','CSE',7,'ECE-316',24,4,Null);
-
---Question 1--
-Select  FirstName,
-LastName,
-Teacher.Dept,
-Salary,
-Semester,
-CourseCode,
-CreditTaken from Teacher inner join Student on Teacher.TID = Student.TeacherID
-where CreditTaken > 1;
+insert into The_customer_table values
+('192-83-7465','Johnson','12 Alma St.','Palo Alto'),
+('019-28-3746','Smith','4 North St.','Rye'),
+('677-89-9011','Hayes','3 Main St.','Harrison'),
+('182-73-6091','Turner','123 Putnam Ave.','Stamford'),
+('321-12-3123','Jones','100 Main St.','Harrison'),
+('336-66-9999','Lindsay','175 Park Ave.','Pittsfield'),
+('019-28-3747','Smith','72 North St.','Rye');
 
 
---Question 2--
-Select Count(Student.id) as NumberofStudent,
-Teacher.FirstName,
-Sum(CreditTaken) as TotalCredit,
-Salary,
-Teacher.Dept
-from Teacher join Student 
-on  Teacher.TID = Student.TeacherID 
-Group By FirstName,salary,Teacher.Dept;
+create table The_account_table(
+account_number varchar(5) NOT NULL,
+balance int,
+PRIMARY KEY(account_number)
+);
 
---Question 3--
-Select Teacher.FirstName, 
-Teacher.LastName, 
-Teacher.Dept, 
-Teacher.Salary,
-Student.CourseCode,
-Sum(CreditTaken) as TotalCredit
-from Teacher
-Left Join Student on Student.TeacherID = Teacher.TID
-where Teacher.Salary between 30000 and 40000
-Group by FirstName,LastName,Teacher.Dept,Salary,CourseCode;
+insert into The_account_table values
+('A-101',500),
+('A-215',700),
+('A-102',400),
+('A-305',350),
+('A-201',900),
+('A-217',750),
+('A-222',700);
 
--- Question 4 --
-Select Teacher.FirstName,
-Teacher.Dept,
-Teacher.Salary,
-Student.Semester,
-Student.CourseCode,
-Student.CreditTaken
-from Teacher
-Left Join Student on Student.TeacherID = Teacher.TID
-Order By Teacher.Dept, FirstName;
 
--- Question 5 --
-Select Teacher.FirstName,
-Teacher.Dept,
-Teacher.Salary,
-Student.Semester,
-Student.CourseCode,
-Student.CreditTaken
-from Teacher
-Join Student on Student.TeacherID = Teacher.TID
-Order By Student.Semester;
+create table The_depositor_table(
+customer_id varchar(12),
+account_number varchar(5),
+FOREIGN KEY (account_number) REFERENCES The_account_table(account_number)
+);
 
--- Question 6 --
-Select Teacher.FirstName, 
-Teacher.LastName, 
-Teacher.Dept, 
-Teacher.Salary,
-Student.CourseCode,
-Student.CreditTaken
-from Teacher
-Join Student on Student.TeacherID = Teacher.TID
-Order BY CreditTaken desc;
+insert into The_depositor_table values
+('192-83-7465','A-101'),
+('192-83-7465','A-201'),
+('019-28-3746','A-215'),
+('677-89-9011','A-102'),
+('182-73-6091','A-305'),
+('321-12-3123','A-217'),
+('336-66-9999','A-222'),
+('019-28-3746','A-201');
 
--- Question 7 --
-Delete from Student
-Where name = 'Arko' and Semester = '6';
 
--- Question 8 --
-Delete from Teacher
-Where FirstName = 'Faruk'
+--Question 2
+select customer_name,customer_street,customer_city from The_customer_table
+where customer_city = 'Harrison';
 
--- Question 9 --
-select max(salary) as totalSalary, FirstName, sum(CreditTaken) as totalCredit, Teacher.Dept
-from Teacher inner join Student
-on Teacher.TID = Student.TeacherID
-where CourseCode like '%31'
-group by FirstName, Teacher.Dept;
+--Question 3
+select customer_name,customer_street,customer_city from The_customer_table
+where customer_street LIKE '%Ave%';
 
-select * from Student;
-select Teacher.FirstName from Teacher;
+--Question 4
 
-drop table Student;
-drop table Teacher;
+select customer_name,customer_street from The_customer_table
+where customer_name LIKE Char(72)+'%';
+
+--Question 5
+select customer_name,customer_city from The_customer_table
+where customer_name LIKE 'T%';
+
+--Question 6
+select customer_name from The_customer_table
+where SUBSTRING(customer_street,3,6) = 'North';
+
+
+/*select * from The_customer_table;
+drop table The_customer_table;
+
+select * from The_account_table;
+drop table The_account_table;
+
+select * from The_depositor_table;
+drop table The_account_table;*/
