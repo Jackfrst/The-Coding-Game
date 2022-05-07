@@ -1,37 +1,56 @@
-#include<bits/stdc++.h>
+#include<iostream>
+#include<iomanip>
+#include<math.h>
+#include<stdlib.h>
+
+/* Define function f(x) which
+   is to be solved */
+#define   f(x)   cos(x)-3*x+1
+/* Write f(x) as x = g(x) and
+   define g(x) here */
+#define   g(x)   (1+cos(x))/3
+
 using namespace std;
-
-void printMaxActivities(int a[], int b[], int n,const char *name[])
-{
-    int i, j, ct=1;
-
-    cout<<"Following activities are selected : "<<endl;
-
-
-    i = 0;
-    cout<<" "<<name[i]<<endl;
-
-
-    for (j = 1; j < n; j++)
-    {
-        if (a[j] >= b[i])
-        {
-            cout<<" "<<name[j]<<endl;
-            i = j;
-            ct++;
-        }
-    }
-    cout<<endl<<" The number of task can be executed is : "<<ct<<endl;
-}
 
 int main()
 {
-    const char *name[] = { "Google Chrome ", "Foxit Reader ", "VS Code ", "Drive " , "MS Teams " , "Libre Office","Kernel Module ", "Crash Handler" , "Google Chrome-1 " ,"SSL Key","Whats App"};
-    int a[] = {1, 3, 0, 5, 3, 5, 6, 8, 8, 2, 12};
-    int b[] = {4, 5, 6, 7, 9, 9, 10, 11, 12, 14, 16};
+	 int step=1, N;
+	 float x0, x1, e;
 
-    int n = sizeof(a)/sizeof(a[0]);
+	/* Setting precision and writing floating point values in fixed-point notation. */
+	 cout<< setprecision(6)<< fixed;
+	 /* Inputs */
+	 cout<<"Enter initial guess: ";
+	 cin>>x0;
 
-    printMaxActivities(a, b, n,name);
-    return 0;
+	 cout<<"Enter tolerable error: ";
+	 cin>>e;
+
+	 cout<<"Enter maximum iteration: ";
+	 cin>>N;
+
+	 /* Implementing Fixed Point Iteration */
+	 cout<< endl<<"**************************"<< endl;
+	 cout<<"Fixed Point Iteration Method"<< endl;
+	 cout<<"**************************"<< endl;
+	 do
+	 {
+		  x1 = g(x0);
+		  cout<<"Iteration-"<< step<<":\t x1 = "<< setw(10)<< x1<<" and f(x1) = "<< setw(10)<< f(x1)<< endl;
+
+		  step = step + 1;
+
+		  if(step>N)
+		  {
+			   cout<<"Not Convergent.";
+			   exit(0);
+		  }
+
+		  x0 = x1;
+
+	 }while( fabs(f(x1)) > e);
+
+	 cout<< endl<<"Root is "<< x1;
+
+	 return(0);
 }

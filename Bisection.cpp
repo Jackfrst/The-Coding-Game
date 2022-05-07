@@ -2,9 +2,9 @@
 using namespace std;
 #define E_a 0
 
-double solution(double x)
+double solution(double m)
 {
-    return pow(x,3) - x - 4;
+    return 4*exp(-m)*sin(m)-1;
 }
 
 void bisection(double a, double b)
@@ -15,14 +15,10 @@ void bisection(double a, double b)
         return;
     }
 
-    double x_o = 0;
-    double x_o1 = 1;
-    int n=0;
+    double x_o = (a+b)/2;
 
-    while (abs(x_o-x_o1) > E_a)
+    while (abs(b-a) > E_a)
     {
-        n++;
-        x_o1 = x_o;
         x_o = (a+b)/2;
         if (solution(x_o) == 0.0)
             break;
@@ -30,13 +26,12 @@ void bisection(double a, double b)
             b = x_o;
         else
             a = x_o;
-        cout<<"At "<<n<<" itteration root is "<<x_o<<endl;
     }
-    cout <<endl<< "The value of root is : " << x_o;
+    cout << "The value of root is : " <<fixed<<setprecision(3)<< x_o;
 }
 int main()
 {
-    double a =1, b =2;
+    double a =0, b =0.5;
     bisection(a, b);
     return 0;
 }
