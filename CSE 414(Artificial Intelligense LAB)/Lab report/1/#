@@ -1,0 +1,13 @@
+male(jhon).
+male(price).
+male(ally).
+male(pat).
+male(alex).
+male(bob).
+male(jim).
+male(tot).
+female(mary).
+female(ana).
+female(ally).
+female(pam).
+parent(j).

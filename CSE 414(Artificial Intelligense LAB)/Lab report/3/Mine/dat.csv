@@ -1,0 +1,31 @@
+﻿SL,Height,Wieght,IQ,Super Powe,Class
+0,200,90,90,NULL,Elite
+1,210,80,81,NULL,Soilder
+2,160,70,75,NULL,Commoner
+3,205,95,96,NULL,Elite
+4,202,86,87,NULL,Soilder
+5,105,74,73,NULL,Commoner
+6,200,92,96,NULL,Elite
+7,205,87,87,NULL,Soilder
+8,180,73,76,NULL,Commoner
+9,130,91,92,NULL,Elite
+10,208,89,82,NULL,Soilder
+11,165,75,78,NULL,Commoner
+12,230,93,91,NULL,Elite
+13,183,86,83,NULL,Soilder
+14,215,87,81,NULL,Soilder
+15,191,72,76,NULL,Commoner
+16,192,120,100,Ice breath,Super_Human
+17,183,95,91,NULL,Elite
+18,205,85,82,NULL,Soilder
+19,176,73,79,NULL,Commoner
+20,215,130,100,Tourch,Super_Human
+21,186,71,62,NULL,Soilder
+22,195,82,82,NULL,Soilder
+23,226,98,91,NULL,Elite
+24,230,140,100,Havy Wieght,Super_Human
+25,170,89,86,NULL,Soilder
+26,230,99,91,NULL,Elite
+27,235,71,72,NULL,Commoner
+28,160,96,91,NULL,Soilder
+29,210,82,89,NULL,Soilder

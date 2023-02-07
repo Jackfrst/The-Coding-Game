@@ -1,0 +1,16 @@
+fibo(0,[0]).
+fibo(1,[0,1]).
+fibo(N, F) :-
+        N > 1,
+        fibo_series(N,Sr,1,[1,0]),
+        reverse(Sr,F).
+
+fibo_series(N,F,N,F).
+
+fibo_sesies(N,F,N0,[V1,V0|Fs]):
+        N > N0,
+        N1 is N0+1,
+        V2 is V0+V1,
+        fibo_series(N,F,N1,[V2,V1,V0|Fs]).
+
+cls:- write('\33\[2J').
